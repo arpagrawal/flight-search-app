@@ -1,17 +1,24 @@
 <template>
   <div id="app">
     <fs-header></fs-header>
+    <div class="fs-content-container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
+import router from './router';
+import i18n from './locale-config';
 import FsHeader from './components/fs-header/fs-header.vue'
 
 export default {
   name: 'App',
   components: {
-    FsHeader
-  }
+    FsHeader,
+  },
+  router,
+  i18n,
 }
 </script>
 
