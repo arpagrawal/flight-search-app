@@ -1,0 +1,13 @@
+<section class="fs-home">
+    <div class="fs-search-container">
+        <fs-search @searchFlight="showData = !showData"></fs-search>
+    </div>
+    <div class="fs-result-container" v-if="showData">
+        <div class="fs-data" v-for="flight in flightData">
+            <span>{{flight.name}}</span>
+            <span>{{flight.flightNo}}</span>
+            <span>{{flight.origin}}</span>
+            <span>{{flight.price}}</span>
+        </div>
+    </div>
+</section>

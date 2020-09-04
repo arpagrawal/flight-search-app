@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import FsSearch from './components/fs-search/fs-search.vue';
+import FsHome from './components/fs-home/fs-home.vue';
 
 const routes = [
-  { path: '/', component: FsSearch },
+  { path: '/', component: FsHome },
 ];
 
 Vue.use(Router);
