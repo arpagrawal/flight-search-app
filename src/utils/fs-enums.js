@@ -1,19 +1,19 @@
 const cities = [
     {
       label: 'Delhi (DEL)',
-      value: 'DEL',
+      value: 'Delhi (DEL)',
     },
     {
-      label: 'Bombay (BOM)',
-      value: 'BOM',
+      label: 'Mumbai (BOM)',
+      value: 'Mumbai (BOM)',
     },
     {
       label: 'Bengaluru (BLR)',
-      value: 'BLR',
+      value: 'Bengaluru (BLR)',
     },
     {
       label: 'Pune (PNQ)',
-      value: 'PNQ',
+      value: 'Pune (PNQ)',
     },
 ];
   

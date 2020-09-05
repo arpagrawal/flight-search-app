@@ -1,13 +1,16 @@
 <section class="fs-home">
     <div class="fs-search-container">
-        <fs-search @searchFlight="showData = !showData"></fs-search>
+        <fs-search @searchFlight="searchFlights($event)"></fs-search>
     </div>
-    <div class="fs-result-container" v-if="showData">
-        <div class="fs-data" v-for="flight in flightData">
+    <div class="fs-result-container">
+        <div class="fs-data" v-for="flight in filteredData" v-if="isFlightAvailable">
             <span>{{flight.name}}</span>
             <span>{{flight.flightNo}}</span>
             <span>{{flight.origin}}</span>
             <span>{{flight.price}}</span>
+        </div>
+        <div v-else>
+            <p class="error">No Flights Found</p>
         </div>
     </div>
 </section>

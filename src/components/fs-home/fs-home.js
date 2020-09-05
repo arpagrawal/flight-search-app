@@ -9,19 +9,19 @@ export default {
     data() {
       return {
           flightData: null,
-          showData: false,
+          filteredData: [],
       };
     },
     directives: {},
-    computed: {},
+    computed: {
+        isFlightAvailable() {
+            return !!this.filteredData;
+        }
+    },
     mounted() {
         this.getFlightData()
         .then(this.handleFlightDataResponse)
         .catch(this.handleFlightDataError);
-        // fetch('https://tw-frontenders.firebaseio.com/advFlightSearch.json')
-        // .then(response => response.json())
-        // .then(this.handleFlightDataResponse)
-        // .catch(this.handleFlightDataError);
     },
     methods: {
         async getFlightData() {
@@ -35,6 +35,30 @@ export default {
         },
         handleFlightDataError(err) {
             console.error(err);
-        }
+        },
+        searchFlights(data) {
+            this.filteredData = [];
+            const directFlights = this.getDirectFlights(data.origin, data.destination, data.departureDate);
+            this.filteredData.push(...directFlights);
+        },
+        getDirectFlights(travelCity, travelDestination, travelDate) {
+            const formattedTravelDate = this.formatDate(travelDate);
+            return  this.flightData.filter((flight) => {
+                return (flight.origin === travelCity && flight.destination === travelDestination && flight.date === formattedTravelDate)
+            });
+        },
+        formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+        
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+        
+            return [year, month, day].join('/');
+        },
     },
   };

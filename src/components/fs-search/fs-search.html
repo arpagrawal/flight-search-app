@@ -24,6 +24,7 @@
             v-model="fromDate"
             class="fs-date-picker"
             :input-debounce='500'
+            :min-date='new Date()'
             :input-props='{
                 placeholder: "Departure",
               }'
@@ -34,6 +35,7 @@
             v-model="toDate"
             class="fs-date-picker"
             :input-debounce='500'
+            :min-date='new Date()'
             :input-props='{
                 placeholder: "Return",
               }'
@@ -50,4 +52,5 @@
         </select>
     </div>
     <button type="button" class="fs-primary" @click="searchFlights()">Search</button>
+    <div class="error" v-if="!isValidSearch">Please enter valid data</div>
 </div>
