@@ -26,6 +26,11 @@ export default {
 * {
   margin: 0;
 }
+body,
+#app {
+  font-family: 'Quicksand', sans-serif;
+  background: #e1e7ee;
+}
 // #app {
 //   font-family: Avenir, Helvetica, Arial, sans-serif;
 //   -webkit-font-smoothing: antialiased;

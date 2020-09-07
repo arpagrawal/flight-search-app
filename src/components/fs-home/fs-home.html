@@ -5,7 +5,7 @@
   <div class="fs-result-container">
     <fs-results :flight-data="filteredOneWayData"></fs-results>
     <fs-results
-      v-if="filteredTwoWayData"
+      v-if="filteredTwoWayData.length > 0"
       :flight-data="filteredTwoWayData"
     ></fs-results>
   </div>

@@ -16,7 +16,7 @@ export default {
       toDate: null,
       persons: 1,
       showSearchError: false,
-      tripType: '',
+      tripType: 'One',
     };
   },
   directives: {},
