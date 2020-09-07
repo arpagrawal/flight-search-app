@@ -1,56 +1,76 @@
 <div class="fs-search">
-    <div class="form-group search-field">
-        <label for="from-city">
-            FROM
-        </label>
-        <select id="from-city" name="from-city" v-model="fromCity">
-            <option v-for="city in cities" :value="city.value">
-            {{ city.label }}
-            </option>
-        </select>
+  <div class="trip-selector">
+    <div class="form-group">
+      <input type="radio" id="one-way" value="One" v-model="tripType" />
+      <label for="one">One Way</label>
+      <input type="radio" id="two-way" value="Two" v-model="tripType" />
+      <label for="two">Round Trip</label>
+    </div>
+  </div>
+  <div class="search-form">
+    <div class="form-group search-field select">
+      <label for="from-city">
+        FROM
+      </label>
+      <select id="from-city" name="from-city" v-model="fromCity">
+        <option v-for="city in cities" :value="city.value">
+          {{ city.label }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group search-field select">
+      <label for="to-city">
+        To
+      </label>
+      <select id="to-city" name="to-city" v-model="toCity">
+        <option v-for="city in cities" :value="city.value">
+          {{ city.label }}
+        </option>
+      </select>
     </div>
     <div class="form-group search-field">
-        <label for="to-city">
-            To
-        </label>
-        <select id="to-city" name="to-city" v-model="toCity">
-            <option v-for="city in cities" :value="city.value">
-            {{ city.label }}
-            </option>
-        </select>
-    </div>
-    <div class="form-group search-field">
-        <date-picker
-            v-model="fromDate"
-            class="fs-date-picker"
-            :input-debounce='500'
-            :min-date='new Date()'
-            :input-props='{
+      <date-picker
+        v-model="fromDate"
+        class="fs-date-picker"
+        :input-debounce="500"
+        :popover="{ placement: $screens({ default: 'bottom', md: 'left-start' }) }"
+        :min-date="new Date()"
+        popover-align="center"
+        :update-on-input="true"
+        :input-props='{
                 placeholder: "Departure",
               }'
-        />
+      />
     </div>
     <div class="form-group search-field">
-        <date-picker
-            v-model="toDate"
-            class="fs-date-picker"
-            :input-debounce='500'
-            :min-date='new Date()'
-            :input-props='{
+      <date-picker
+        v-model="toDate"
+        class="fs-date-picker"
+        :input-debounce="500"
+        :popover="{ placement: $screens({ default: 'bottom', md: 'left-start' }) }"
+        :min-date="new Date()"
+        popover-align="center"
+        :update-on-input="true"
+        :input-props='{
                 placeholder: "Return",
               }'
-        />
+      />
     </div>
-    <div class="form-group search-field">
-        <label for="persons">
-            Persons
-        </label>
-        <select id="persons" name="persons" v-model="persons">
-            <option v-for="person in 6" :value="person">
-            {{ person }}
-            </option>
-        </select>
+    <div class="form-group search-field select">
+      <label for="persons">
+        Persons
+      </label>
+      <select id="persons" name="persons" v-model="persons">
+        <option v-for="person in 6" :value="person">
+          {{ person }}
+        </option>
+      </select>
     </div>
-    <button type="button" class="fs-primary" @click="searchFlights()">Search</button>
+    <button type="button" class="fs-primary" @click="searchFlights()">
+      Search
+    </button>
+  </div>
+  <div class="error-block">
     <div class="error" v-if="!isValidSearch">Please enter valid data</div>
+  </div>
 </div>

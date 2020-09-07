@@ -1,3 +1,10 @@
 module.exports = {
-    chainWebpack: config => config.optimization.minimize(false)
-  };
+  chainWebpack: (config) => config.optimization.minimize(false),
+  css: {
+    loaderOptions: {
+      less: {
+        prependData: "@import '~@/styles/styles.less';",
+      },
+    },
+  },
+};

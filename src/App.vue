@@ -10,7 +10,7 @@
 <script>
 import router from './router';
 import i18n from './locale-config';
-import FsHeader from './components/fs-header/fs-header.vue'
+import FsHeader from './components/fs-header/fs-header.vue';
 
 export default {
   name: 'App',
@@ -19,19 +19,19 @@ export default {
   },
   router,
   i18n,
-}
+};
 </script>
 
-<style>
+<style lang="less">
 * {
   margin: 0;
 }
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 10px;
-}
+// #app {
+//   font-family: Avenir, Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
+//   color: #2c3e50;
+//   margin-top: 10px;
+// }
 </style>

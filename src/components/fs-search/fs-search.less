@@ -1,19 +1,25 @@
 .fs-search {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 1px solid blue;
+  .search-form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    border: 1px solid blue;
-    .search-field {
-        width: 100%;
-        .fs-date-picker {
-            input {
-                padding: 8px 0;
-                text-align: center;
-            }
-        }
+    padding: 15px 0px;
+  }
+
+  .search-field {
+    // width: 100%;
+    .fs-date-picker {
+      input {
+        padding: 8px 0;
+        text-align: center;
+      }
     }
-    .error{
-        color: red;
-    }
+  }
+  .error {
+    color: red;
+  }
 }

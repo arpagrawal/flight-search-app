@@ -1,0 +1,8 @@
+<section class="fs-results">
+  <div class="fs-data" v-for="flight in flightData" v-if="true">
+    <fs-booking-tile :flight-info="flight"></fs-booking-tile>
+  </div>
+  <div v-else>
+    <p class="error">No Flights Found</p>
+  </div>
+</section>
