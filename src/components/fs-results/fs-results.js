@@ -14,6 +14,9 @@ export default {
   data() {
     return {};
   },
+  watch: {
+    flightData() {},
+  },
   directives: {},
   computed: {},
   mounted() {},

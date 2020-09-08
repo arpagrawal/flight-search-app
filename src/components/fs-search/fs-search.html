@@ -1,6 +1,6 @@
 <div class="fs-search">
   <div class="trip-selector">
-    <div class="form-group">
+    <div class="form-group radio-group">
       <input type="radio" id="one-way" value="One" v-model="tripType" />
       <label for="one">One Way</label>
       <input type="radio" id="two-way" value="Two" v-model="tripType" />
@@ -42,13 +42,13 @@
               }'
       />
     </div>
-    <div class="form-group search-field">
+    <div class="form-group search-field" v-if="isRoundTrip">
       <date-picker
         v-model="toDate"
         class="fs-date-picker"
         :input-debounce="500"
         :popover="{ placement: $screens({ default: 'bottom', md: 'left-start' }) }"
-        :min-date="new Date()"
+        :min-date="fromDate"
         popover-align="center"
         :update-on-input="true"
         :input-props='{

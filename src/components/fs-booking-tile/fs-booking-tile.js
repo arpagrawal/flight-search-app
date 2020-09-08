@@ -10,6 +10,8 @@ export default {
   data() {
     return {
       flightData: [],
+      multiFlightHeaderDetails: {},
+      showDetails: false,
     };
   },
   directives: {},
@@ -32,7 +34,7 @@ export default {
         .reduce((a, b) => {
           return Number(a) + Number(b);
         }, 0);
-      const obj = {
+      this.multiFlightHeaderDetails = {
         arrivalTime: this.flightInfo[lastElement].arrivalTime,
         date: this.flightInfo[0].date,
         departureTime: this.flightInfo[0].departureTime,
@@ -42,7 +44,11 @@ export default {
         origin: this.flightInfo[0].origin,
         price: totalPrice,
       };
-      this.flightData = [obj, ...this.flightData];
+
+      //   this.flightData = [obj, ...this.flightData];
+    },
+    toggleDetailsVisibility() {
+      this.showDetails = !this.showDetails;
     },
   },
 };

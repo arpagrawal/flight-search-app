@@ -1,5 +1,52 @@
-<div class="fs-booking-tile">
+<!-- <div class="fs-booking-tile">
   <div v-for="(flight, index) in flightData" class="flight-details">
+    <i class="far fa-paper-plane"></i>
+    <span>{{flight.name}}</span>
+    <span v-if="flight.flightNo">{{flight.flightNo}}</span>
+    <span>{{flight.origin}}</span>
+    <span>{{flight.destination}}</span>
+    <span>{{flight.price}}</span>
+    <button class="fs-secondary" v-if="index == 0">Book</button>
+  </div>
+</div> -->
+<div class="fs-booking-tile">
+  <!-- Section for displaying multi flight tile -->
+  <div v-if="ismultiFlight" class="m-f-container">
+    <div class="m-f-header flight-details">
+      <span>
+        {{multiFlightHeaderDetails.name}}
+      </span>
+      <span v-if="multiFlightHeaderDetails.flightNo"
+        >{{multiFlightHeaderDetails.flightNo}}</span
+      >
+      <span>{{multiFlightHeaderDetails.origin}}</span>
+      <span>{{multiFlightHeaderDetails.destination}}</span>
+      <span>{{multiFlightHeaderDetails.price}}</span>
+      <button class="fs-secondary">Book</button>
+    </div>
+    <p class="link" @click="toggleDetailsVisibility()">Click to see details</p>
+    <template v-if="showDetails">
+      <div
+        class="m-f-details flight-details"
+        v-for="(flight, index) in flightData"
+        :key="flight.flightNo"
+      >
+        <i class="far fa-paper-plane"></i>
+        <span>{{flight.name}}</span>
+        <span v-if="flight.flightNo">{{flight.flightNo}}</span>
+        <span>{{flight.origin}}</span>
+        <span>{{flight.destination}}</span>
+        <span>{{flight.price}}</span>
+      </div>
+    </template>
+  </div>
+  <!-- Section for displaying direct flights -->
+  <div
+    v-for="(flight, index) in flightData"
+    :key="flight.flightNo"
+    class="flight-details"
+    v-else
+  >
     <i class="far fa-paper-plane"></i>
     <span>{{flight.name}}</span>
     <span v-if="flight.flightNo">{{flight.flightNo}}</span>
