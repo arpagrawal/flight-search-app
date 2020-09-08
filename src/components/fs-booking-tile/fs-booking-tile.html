@@ -1,14 +1,3 @@
-<!-- <div class="fs-booking-tile">
-  <div v-for="(flight, index) in flightData" class="flight-details">
-    <i class="far fa-paper-plane"></i>
-    <span>{{flight.name}}</span>
-    <span v-if="flight.flightNo">{{flight.flightNo}}</span>
-    <span>{{flight.origin}}</span>
-    <span>{{flight.destination}}</span>
-    <span>{{flight.price}}</span>
-    <button class="fs-secondary" v-if="index == 0">Book</button>
-  </div>
-</div> -->
 <div class="fs-booking-tile">
   <!-- Section for displaying multi flight tile -->
   <div v-if="ismultiFlight" class="m-f-container">
@@ -22,9 +11,11 @@
       <span>{{multiFlightHeaderDetails.origin}}</span>
       <span>{{multiFlightHeaderDetails.destination}}</span>
       <span>{{multiFlightHeaderDetails.price}}</span>
-      <button class="fs-secondary">Book</button>
+      <button class="fs-secondary">{{$t('messages.fsMessages.book')}}</button>
     </div>
-    <p class="link" @click="toggleDetailsVisibility()">Click to see details</p>
+    <p class="link" @click="toggleDetailsVisibility()">
+      {{$t('messages.fsMessages.detailsTxt')}}
+    </p>
     <template v-if="showDetails">
       <div
         class="m-f-details flight-details"
@@ -53,6 +44,8 @@
     <span>{{flight.origin}}</span>
     <span>{{flight.destination}}</span>
     <span>{{flight.price}}</span>
-    <button class="fs-secondary" v-if="index == 0">Book</button>
+    <button class="fs-secondary" v-if="index == 0">
+      {{$t('messages.fsMessages.book')}}
+    </button>
   </div>
 </div>

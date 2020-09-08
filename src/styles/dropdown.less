@@ -6,7 +6,7 @@ select {
   outline: 0;
   box-shadow: none;
   border: 0 !important;
-  background: #175abf;
+  background: @fs-secondary;
   background-image: none;
 }
 /* Remove IE arrow */
@@ -20,13 +20,12 @@ select::-ms-expand {
   width: max-content;
   height: max-content;
   line-height: 3;
-  //   background: #175abf;
   overflow: hidden;
   border-radius: 0.25em;
 }
 select {
   padding: 0 4em;
-  color: #fff;
+  color: @white;
   margin: 0 1em;
   cursor: pointer;
 }
@@ -37,7 +36,7 @@ select {
   top: 0;
   right: 0;
   padding: 0 1em;
-  background: #175abf;
+  background: @fs-secondary;
   cursor: pointer;
   pointer-events: none;
   -webkit-transition: 0.25s all ease;
@@ -46,5 +45,5 @@ select {
 }
 /* Transition */
 .select:hover::after {
-  color: #f39c12;
+  color: @fs-primary;
 }

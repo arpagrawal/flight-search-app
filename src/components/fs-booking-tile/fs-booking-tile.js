@@ -27,6 +27,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * This functtion creates data for showing header details of multiple flight
+     */
     createMultipleFlightData() {
       const lastElement = this.flightInfo.length - 1;
       const totalPrice = this.flightInfo
@@ -44,9 +47,11 @@ export default {
         origin: this.flightInfo[0].origin,
         price: totalPrice,
       };
-
-      //   this.flightData = [obj, ...this.flightData];
     },
+
+    /**
+     * function to toggle visibility of show details
+     */
     toggleDetailsVisibility() {
       this.showDetails = !this.showDetails;
     },

@@ -1,5 +1,6 @@
 import fsSearch from '../fs-search/fs-search.vue';
 import fsResults from '../fs-results/fs-results.vue';
+import serviceUrls from '../../utils/fs-service-urls';
 
 export default {
   name: 'fs-home',
@@ -25,27 +26,43 @@ export default {
     },
   },
   mounted() {
+    /**
+     * On page load call function get flight data
+     */
     this.getFlightData()
       .then(this.handleFlightDataResponse)
       .catch(this.handleFlightDataError);
   },
   methods: {
+    /**
+     * function to fetch flight data from service url.
+     */
     async getFlightData() {
-      let response = await fetch(
-        'https://tw-frontenders.firebaseio.com/advFlightSearch.json',
-      );
+      let response = await fetch(serviceUrls.flights);
       let json = await response.json();
       return json;
     },
+
+    /**
+     * function to handle flight data response
+     */
     handleFlightDataResponse(res) {
       if (res) {
         this.flightData = this.formatResponse(res);
         console.log(this.flightData);
       }
     },
+
+    /**
+     * function to handle flight response error
+     */
     handleFlightDataError(err) {
       console.error(err);
     },
+
+    /**
+     * function to format flight response and get the arrivalDate and departureDate as Date() object.
+     */
     formatResponse(res) {
       const formattedResp = res.map((flight) => {
         let date = new Date(flight['date']);
@@ -59,6 +76,11 @@ export default {
       });
       return formattedResp;
     },
+
+    /**
+     * function to be called on click of search button
+     * @param data represents the data that is searched by user
+     */
     searchFlights(data) {
       this.filteredOneWayData = [];
       this.filteredTwoWayData = [];
@@ -68,12 +90,14 @@ export default {
         data.departureDate,
       );
 
-      let date = new Date(data.departureDate);
-      let date2 = new Date(date);
-      date2 = new Date(date2.setHours(23, 59));
-      this.getFlightOnD(data.origin, data.destination, date, date2, {});
-      this.filteredOneWayData = this.filteredData;
-
+      let depDate = new Date(data.departureDate);
+      let depDateEod = new Date(depDate);
+      depDateEod = new Date(depDateEod.setHours(23, 59));
+      this.getFlightOnD(data.origin, data.destination, depDate, depDateEod, {});
+      this.filteredOneWayData = [...this.filteredData];
+      /**
+       * This section will be executed if user has selected return trip
+       */
       if (data.returnDate) {
         this.createSearchInfoData(
           data.destination,
@@ -81,31 +105,31 @@ export default {
           data.returnDate,
           1,
         );
-        let date = new Date(data.returnDate);
-        let date2 = new Date(date);
-        date2 = new Date(date2.setHours(23, 59));
-        this.getFlightOnD(data.destination, data.origin, date, date2, {});
-        this.filteredTwoWayData = this.filteredData;
+        let retDate = new Date(data.returnDate);
+        let retDateEod = new Date(retDate);
+        retDateEod = new Date(retDateEod.setHours(23, 59));
+        this.getFlightOnD(
+          data.destination,
+          data.origin,
+          retDate,
+          retDateEod,
+          {},
+        );
+        this.filteredTwoWayData = [...this.filteredData];
       }
-
-      console.log(this.filteredFlightData);
-      //   const directFlights = this.getDirectFlights(
-      //     data.origin,
-      //     data.destination,
-      //     data.departureDate,
-      //   );
-      //   this.filteredOneWayData.push(...directFlights);
-      //   if (data.returnDate) {
-      //     const directFlights = this.getDirectFlights(
-      //       data.destination,
-      //       data.origin,
-      //       data.returnDate,
-      //     );
-      //     this.filteredTwoWayData.push(...directFlights);
-      //   }
-
-      // const multiAirline = this.getMultiFlights();
     },
+
+    /**
+     * function to get the direct and multi-flight data. This fuction uses the recursion logic to solve this problem of searching different
+     * paths between two cities. The route array keep track of the paths that are being found.
+     * @param origin represents city of origin for search
+     * @param destination represents city of destination for search
+     * @param minDepartureDate represents the departure date from origin
+     * @param maxDepartureDate represents the maximum time of that day
+     * @param visited represents an object which checks if we have already visited this node while executing recursion
+     * @param path represents array to store temporary path which can be the right path to destination.
+     * @param route represents final list of available routes for destination.
+     */
     getFlightOnD(
       origin,
       destination,
@@ -115,40 +139,29 @@ export default {
       path = [],
       route = [],
     ) {
-      console.log('date1' + minDepartureDate);
-      console.log('date2' + maxDepartureDate);
-
       visited[origin] = 1;
       const pathrec = [...path];
+
       for (let i = 0; i < this.flightData.length; i++) {
         let flight = this.flightData[i];
-        // if (minDepartureDate <= flight["departureTime"] && flight["departureTime"] <= maxDepartureDate) {
-        //     console.log("i am here");
-        // }
         if (
           flight['origin'] == origin &&
           !visited[flight['destination']] &&
           minDepartureDate <= flight['departureTime'] &&
           flight['departureTime'] <= maxDepartureDate
         ) {
-          // console.log("flight date and time + 30 minutes");
-          // console.log(new Date(date2.setTime(date2.getTime() + (30 * 60 * 1000))));
-          // console.log(date.toDateString());
           if (flight['destination'] == destination) {
             route.push([...pathrec, flight]);
             this.filteredData = route;
             console.log(route);
           } else {
             const flightdate = new Date(flight['arrivalTime']);
-            // console.log(flight["arrivalTime"]);
             const date = new Date(
               flightdate.setTime(flightdate.getTime() + 30 * 60 * 1000),
             );
             const date2 = new Date(
               flightdate.setTime(flightdate.getTime() + 10 * 60 * 60 * 1000),
             );
-            // console.log("date" + date);
-            // console.log("date2" + date2)
             this.getFlightOnD(
               flight['destination'],
               destination,
@@ -163,6 +176,10 @@ export default {
       }
       return;
     },
+
+    /**
+     * This functtion creates result header data as per oneWay or round trip
+     */
     createSearchInfoData(origin, destination, departureDate, r) {
       if (r) {
         this.$set(this.returnInfoData, 'origin', origin);
@@ -173,27 +190,6 @@ export default {
       this.$set(this.oneWayInfoData, 'origin', origin);
       this.$set(this.oneWayInfoData, 'destination', destination);
       this.$set(this.oneWayInfoData, 'deparureDate', departureDate);
-    },
-    getDirectFlights(travelCity, travelDestination, travelDate) {
-      const formattedTravelDate = this.formatDate(travelDate);
-      return this.flightData.filter((flight) => {
-        return (
-          flight.origin === travelCity &&
-          flight.destination === travelDestination &&
-          flight.date === formattedTravelDate
-        );
-      });
-    },
-    formatDate(date) {
-      var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-      if (month.length < 2) month = '0' + month;
-      if (day.length < 2) day = '0' + day;
-
-      return [year, month, day].join('/');
     },
   },
 };

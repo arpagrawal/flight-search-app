@@ -2,15 +2,15 @@
   <div class="trip-selector">
     <div class="form-group radio-group">
       <input type="radio" id="one-way" value="One" v-model="tripType" />
-      <label for="one">One Way</label>
+      <label for="one">{{$t('messages.fsMessages.oneWay')}}</label>
       <input type="radio" id="two-way" value="Two" v-model="tripType" />
-      <label for="two">Round Trip</label>
+      <label for="two">{{$t('messages.fsMessages.roundTrip')}}</label>
     </div>
   </div>
   <div class="search-form">
     <div class="form-group search-field select">
       <label for="from-city">
-        FROM
+        {{$t('messages.fsMessages.fromLabel')}}
       </label>
       <select id="from-city" name="from-city" v-model="fromCity">
         <option v-for="city in cities" :value="city.value">
@@ -20,7 +20,7 @@
     </div>
     <div class="form-group search-field select">
       <label for="to-city">
-        To
+        {{$t('messages.fsMessages.toLabel')}}
       </label>
       <select id="to-city" name="to-city" v-model="toCity">
         <option v-for="city in cities" :value="city.value">
@@ -38,7 +38,7 @@
         popover-align="center"
         :update-on-input="true"
         :input-props='{
-                placeholder: "Departure",
+                placeholder: "Departure Date",
               }'
       />
     </div>
@@ -52,13 +52,13 @@
         popover-align="center"
         :update-on-input="true"
         :input-props='{
-                placeholder: "Return",
+                placeholder: "Return Date",
               }'
       />
     </div>
     <div class="form-group search-field select">
       <label for="persons">
-        Persons
+        {{$t('messages.fsMessages.personsLabel')}}
       </label>
       <select id="persons" name="persons" v-model="persons">
         <option v-for="person in 6" :value="person">
@@ -67,10 +67,12 @@
       </select>
     </div>
     <button type="button" class="fs-primary" @click="searchFlights()">
-      Search
+      {{$t('messages.fsMessages.searchBtnlabel')}}
     </button>
   </div>
   <div class="error-block">
-    <div class="error" v-if="!isValidSearch">Please enter valid data</div>
+    <div class="error" v-if="!validateSearch.isValid">
+      {{validateSearch.errText}}
+    </div>
   </div>
 </div>

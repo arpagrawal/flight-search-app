@@ -2,9 +2,15 @@
   <div class="search-details-head">
     <img class="detail-img" />
     <div class="details">
-      <h2>{{searchInfo.origin}} to {{searchInfo.destination}}</h2>
+      <h2>
+        {{searchInfo.origin}} {{$t('messages.fsMessages.to')}}
+        {{searchInfo.destination}}
+      </h2>
       <p>
-        <span>{{flightData.length}} flight(s) found</span>
+        <span
+          >{{flightData.length}}
+          {{$t('messages.fsMessages.flightFoundSuffix')}}</span
+        >
         <span>{{displayDate(searchInfo.deparureDate)}}</span>
       </p>
     </div>
@@ -12,12 +18,12 @@
   <div
     class="fs-data"
     v-for="(flight,index) in flightData"
-    :key="`flight${Date.now()}`"
-    v-if="true"
+    :key="`flight${Date.now()+Math.random()}`"
+    v-if="flightData.length"
   >
     <fs-booking-tile :flight-info="flight"></fs-booking-tile>
   </div>
   <div v-else>
-    <p class="error">No Flights Found</p>
+    <p class="error">{{$t('messages.fsMessages.noFlightMsg')}}</p>
   </div>
 </div>

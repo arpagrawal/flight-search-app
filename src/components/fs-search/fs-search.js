@@ -27,19 +27,29 @@ export default {
       }
       return false;
     },
-    isValidSearch() {
+    validateSearch() {
       if (this.isRoundTrip) {
-        return (
-          !!this.fromCity &&
-          !!this.toCity &&
-          !!this.fromDate &&
-          !!this.toDate &&
-          !!this.persons
-        );
+        return {
+          isValid:
+            !!this.fromCity &&
+            !!this.toCity &&
+            !!this.fromDate &&
+            !!this.toDate &&
+            !!this.persons,
+          errText: 'Please enter all round trip fields',
+        };
       }
-      return (
-        !!this.fromCity && !!this.toCity && !!this.fromDate && !!this.persons
-      );
+      return {
+        isValid:
+          !!this.fromCity && !!this.toCity && !!this.fromDate && !!this.persons,
+        errText: 'Please enter all one way fields',
+      };
+    },
+    isSameCity() {
+      if (this.fromCity === this.toCity) {
+        return true;
+      }
+      return false;
     },
     searchedData() {
       const searchedObj = {
@@ -61,9 +71,16 @@ export default {
   },
   mounted() {},
   methods: {
+    /**
+     * function to emit flight data to fs-home component
+     */
     searchFlights() {
-      if (this.isValidSearch) {
-        this.$emit('searchFlight', this.searchedData);
+      if (this.validateSearch.isValid) {
+        if (!this.isSameCity) {
+          this.$emit('searchFlight', this.searchedData);
+        } else {
+          this.toCity = null;
+        }
       }
     },
   },
