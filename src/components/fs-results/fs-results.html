@@ -9,7 +9,12 @@
       </p>
     </div>
   </div>
-  <div class="fs-data" v-for="flight in flightData" :key="flight" v-if="true">
+  <div
+    class="fs-data"
+    v-for="(flight,index) in flightData"
+    :key="`flight${index}`"
+    v-if="true"
+  >
     <fs-booking-tile :flight-info="flight"></fs-booking-tile>
   </div>
   <div v-else>

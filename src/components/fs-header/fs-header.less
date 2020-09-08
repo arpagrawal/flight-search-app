@@ -2,7 +2,17 @@
   border-bottom: 3px solid black;
   padding: 16px 60px;
   background: @white;
-  h1 {
-    color: red;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .logo {
+    svg {
+      font-size: 40px;
+      color: #2e67b2;
+      transform: rotate(-45deg);
+    }
+  }
+  p {
+    color: #2d67b2;
   }
 }

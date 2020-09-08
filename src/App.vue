@@ -31,6 +31,10 @@ body,
   font-family: 'Quicksand', sans-serif;
   background: #e1e7ee;
 }
+
+a {
+  text-decoration: none;
+}
 // #app {
 //   font-family: Avenir, Helvetica, Arial, sans-serif;
 //   -webkit-font-smoothing: antialiased;
