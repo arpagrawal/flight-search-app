@@ -17,6 +17,10 @@ export default {
       filteredData: [],
       oneWayInfoData: {},
       returnInfoData: {},
+      layoverTime: {
+        min: 30,
+        max: 600,
+      },
     };
   },
   directives: {},
@@ -84,12 +88,13 @@ export default {
     searchFlights(data) {
       this.filteredOneWayData = [];
       this.filteredTwoWayData = [];
+      this.filteredData = [];
+
       this.createSearchInfoData(
         data.origin,
         data.destination,
         data.departureDate,
       );
-
       let depDate = new Date(data.departureDate);
       let depDateEod = new Date(depDate);
       depDateEod = new Date(depDateEod.setHours(23, 59));
@@ -156,11 +161,17 @@ export default {
             console.log(route);
           } else {
             const flightdate = new Date(flight['arrivalTime']);
+            // Date object for adding get min layover time between two flights(30 mins)
             const date = new Date(
-              flightdate.setTime(flightdate.getTime() + 30 * 60 * 1000),
+              flightdate.setTime(
+                flightdate.getTime() + this.layoverTime.min * 60 * 1000,
+              ),
             );
+            // Date object for adding get max layover time between two flights(10 hours)
             const date2 = new Date(
-              flightdate.setTime(flightdate.getTime() + 10 * 60 * 60 * 1000),
+              flightdate.setTime(
+                flightdate.getTime() + this.layoverTime.max * 60 * 1000,
+              ),
             );
             this.getFlightOnD(
               flight['destination'],
