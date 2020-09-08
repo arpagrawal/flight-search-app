@@ -14,6 +14,7 @@ export default {
       filteredOneWayData: [],
       filteredTwoWayData: [],
       filteredData: [],
+      searchInfoData: {},
     };
   },
   directives: {},
@@ -60,6 +61,11 @@ export default {
     searchFlights(data) {
       this.filteredOneWayData = [];
       this.filteredTwoWayData = [];
+      this.createSearchInfoData(
+        data.origin,
+        data.destination,
+        data.departureDate,
+      );
 
       let date = new Date(data.departureDate);
       let date2 = new Date(date);
@@ -149,6 +155,11 @@ export default {
         }
       }
       return;
+    },
+    createSearchInfoData(origin, destination, departureDate) {
+      this.$set(this.searchInfoData, 'origin', origin);
+      this.$set(this.searchInfoData, 'destination', destination);
+      this.$set(this.searchInfoData, 'deparureDate', departureDate);
     },
     getDirectFlights(travelCity, travelDestination, travelDate) {
       const formattedTravelDate = this.formatDate(travelDate);

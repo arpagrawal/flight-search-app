@@ -31,4 +31,17 @@
   .error {
     color: red;
   }
+  @media screen and (max-width: @screen-sm-max) {
+    .search-form {
+      flex-direction: column;
+      align-items: flex-start;
+      .form-group {
+        margin: 20px 0;
+        width: 100%;
+        select {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

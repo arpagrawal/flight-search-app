@@ -10,6 +10,10 @@ export default {
       type: Array,
       default: [],
     },
+    searchInfo: {
+      type: Object,
+      default: {},
+    },
   },
   data() {
     return {};
@@ -20,5 +24,10 @@ export default {
   directives: {},
   computed: {},
   mounted() {},
-  methods: {},
+  methods: {
+    displayDate(d) {
+      const displayDate = new Date(d);
+      return displayDate.toDateString();
+    },
+  },
 };

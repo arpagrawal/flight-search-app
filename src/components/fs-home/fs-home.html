@@ -3,10 +3,14 @@
     <fs-search @searchFlight="searchFlights($event)"></fs-search>
   </div>
   <div class="fs-result-container">
-    <fs-results :flight-data="filteredOneWayData"></fs-results>
+    <fs-results
+      :flight-data="filteredOneWayData"
+      :search-info="searchInfoData"
+    ></fs-results>
     <fs-results
       v-if="filteredTwoWayData.length > 0"
       :flight-data="filteredTwoWayData"
+      :search-info="searchInfoData"
     ></fs-results>
   </div>
 </section>
