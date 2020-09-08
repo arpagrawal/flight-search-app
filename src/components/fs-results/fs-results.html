@@ -1,29 +1,32 @@
-<div class="fs-results" v-if="flightData.length >  0">
-  <div class="search-details-head">
-    <img class="detail-img" />
-    <div class="details">
-      <h2>
-        {{searchInfo.origin}} {{$t('messages.fsMessages.to')}}
-        {{searchInfo.destination}}
-      </h2>
-      <p>
-        <span
-          >{{flightData.length}}
-          {{$t('messages.fsMessages.flightFoundSuffix')}}</span
-        >
-        <span>{{displayDate(searchInfo.deparureDate)}}</span>
-      </p>
+<div class="fs-results">
+  <template v-if="flightData.length > 0">
+    <div class="search-details-head">
+      <img class="detail-img" />
+      <div class="details">
+        <h2>
+          {{searchInfo.origin}} {{$t('messages.fsMessages.to')}}
+          {{searchInfo.destination}}
+        </h2>
+        <p>
+          <span
+            >{{flightData.length}}
+            {{$t('messages.fsMessages.flightFoundSuffix')}}</span
+          >
+          <span>{{displayDate(searchInfo.deparureDate)}}</span>
+        </p>
+      </div>
     </div>
-  </div>
-  <div
-    class="fs-data"
-    v-for="(flight,index) in flightData"
-    :key="`flight${Date.now()+Math.random()}`"
-    v-if="flightData.length"
-  >
-    <fs-booking-tile :flight-info="flight"></fs-booking-tile>
-  </div>
-  <div v-else>
+    <div
+      class="fs-data"
+      v-for="(flight,index) in flightData"
+      :key="`flight${Date.now()+Math.random()}`"
+      v-if="flightData.length > 0"
+    >
+      <fs-booking-tile :flight-info="flight"></fs-booking-tile>
+    </div>
+  </template>
+
+  <template v-else>
     <p class="error">{{$t('messages.fsMessages.noFlightMsg')}}</p>
-  </div>
+  </template>
 </div>
