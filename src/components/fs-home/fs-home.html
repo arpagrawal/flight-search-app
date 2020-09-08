@@ -5,12 +5,12 @@
   <div class="fs-result-container">
     <fs-results
       :flight-data="filteredOneWayData"
-      :search-info="searchInfoData"
+      :search-info="oneWayInfoData"
     ></fs-results>
     <fs-results
       v-if="filteredTwoWayData.length > 0"
       :flight-data="filteredTwoWayData"
-      :search-info="searchInfoData"
+      :search-info="returnInfoData"
     ></fs-results>
   </div>
 </section>

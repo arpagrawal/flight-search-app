@@ -14,7 +14,8 @@ export default {
       filteredOneWayData: [],
       filteredTwoWayData: [],
       filteredData: [],
-      searchInfoData: {},
+      oneWayInfoData: {},
+      returnInfoData: {},
     };
   },
   directives: {},
@@ -74,6 +75,12 @@ export default {
       this.filteredOneWayData = this.filteredData;
 
       if (data.returnDate) {
+        this.createSearchInfoData(
+          data.destination,
+          data.origin,
+          data.returnDate,
+          1,
+        );
         let date = new Date(data.returnDate);
         let date2 = new Date(date);
         date2 = new Date(date2.setHours(23, 59));
@@ -156,10 +163,16 @@ export default {
       }
       return;
     },
-    createSearchInfoData(origin, destination, departureDate) {
-      this.$set(this.searchInfoData, 'origin', origin);
-      this.$set(this.searchInfoData, 'destination', destination);
-      this.$set(this.searchInfoData, 'deparureDate', departureDate);
+    createSearchInfoData(origin, destination, departureDate, r) {
+      if (r) {
+        this.$set(this.returnInfoData, 'origin', origin);
+        this.$set(this.returnInfoData, 'destination', destination);
+        this.$set(this.returnInfoData, 'deparureDate', departureDate);
+        return;
+      }
+      this.$set(this.oneWayInfoData, 'origin', origin);
+      this.$set(this.oneWayInfoData, 'destination', destination);
+      this.$set(this.oneWayInfoData, 'deparureDate', departureDate);
     },
     getDirectFlights(travelCity, travelDestination, travelDate) {
       const formattedTravelDate = this.formatDate(travelDate);

@@ -2,7 +2,7 @@
   <div class="search-details-head">
     <img class="detail-img" />
     <div class="details">
-      <h2>{{searchInfo.origin}} to {{searchInfo.origin}}</h2>
+      <h2>{{searchInfo.origin}} to {{searchInfo.destination}}</h2>
       <p>
         <span>{{flightData.length}} flight(s) found</span>
         <span>{{displayDate(searchInfo.deparureDate)}}</span>
@@ -12,7 +12,7 @@
   <div
     class="fs-data"
     v-for="(flight,index) in flightData"
-    :key="`flight${index}`"
+    :key="`flight${Date.now()}`"
     v-if="true"
   >
     <fs-booking-tile :flight-info="flight"></fs-booking-tile>
