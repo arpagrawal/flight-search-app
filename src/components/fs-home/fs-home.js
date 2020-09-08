@@ -17,6 +17,7 @@ export default {
       filteredData: [],
       oneWayInfoData: {},
       returnInfoData: {},
+      isDataSearched: false,
       layoverTime: {
         min: 30,
         max: 600,
@@ -89,7 +90,7 @@ export default {
       this.filteredOneWayData = [];
       this.filteredTwoWayData = [];
       this.filteredData = [];
-
+      this.isDataSearched = true;
       this.createSearchInfoData(
         data.origin,
         data.destination,

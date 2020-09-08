@@ -1,21 +1,21 @@
 <div class="fs-results">
-  <template v-if="flightData.length > 0">
-    <div class="search-details-head">
-      <img class="detail-img" />
-      <div class="details">
-        <h2>
-          {{searchInfo.origin}} {{$t('messages.fsMessages.to')}}
-          {{searchInfo.destination}}
-        </h2>
-        <p>
-          <span
-            >{{flightData.length}}
-            {{$t('messages.fsMessages.flightFoundSuffix')}}</span
-          >
-          <span>{{displayDate(searchInfo.deparureDate)}}</span>
-        </p>
-      </div>
+  <div class="search-details-head">
+    <img class="detail-img" />
+    <div class="details">
+      <h2>
+        {{searchInfo.origin}} {{$t('messages.fsMessages.to')}}
+        {{searchInfo.destination}}
+      </h2>
+      <p>
+        <span
+          >{{flightData.length}}
+          {{$t('messages.fsMessages.flightFoundSuffix')}}</span
+        >
+        <span>{{displayDate(searchInfo.deparureDate)}}</span>
+      </p>
     </div>
+  </div>
+  <template v-if="flightData.length > 0">
     <div
       class="fs-data"
       v-for="(flight,index) in flightData"

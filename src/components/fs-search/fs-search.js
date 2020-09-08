@@ -10,8 +10,8 @@ export default {
   data() {
     return {
       cities,
-      fromCity: null,
-      toCity: null,
+      fromCity: 'Delhi (DEL)',
+      toCity: 'Mumbai (BOM)',
       fromDate: null,
       toDate: null,
       persons: 1,
@@ -36,13 +36,13 @@ export default {
             !!this.fromDate &&
             !!this.toDate &&
             !!this.persons,
-          errText: 'Please enter all round trip fields',
+          errText: this.$t('messages.fsMessages.commonTwoWayErr'),
         };
       }
       return {
         isValid:
           !!this.fromCity && !!this.toCity && !!this.fromDate && !!this.persons,
-        errText: 'Please enter all one way fields',
+        errText: this.$t('messages.fsMessages.commonOneWayErr'),
       };
     },
     isSameCity() {

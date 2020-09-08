@@ -13,6 +13,8 @@ const fsMessages = {
   book: 'Book',
   detailsTxt: 'Click to see details',
   fotterTxt: 'Flight search Corporation(Arpit)',
+  commonOneWayErr: 'Please enter all trip details',
+  commonTwoWayErr: 'Please enter all round trip details',
 };
 
 export default fsMessages;

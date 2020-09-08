@@ -2,7 +2,7 @@
   <div class="fs-search-container">
     <fs-search @searchFlight="searchFlights($event)"></fs-search>
   </div>
-  <div class="fs-result-container">
+  <div class="fs-result-container" v-if="isDataSearched">
     <fs-results
       :flight-data="filteredOneWayData"
       :search-info="oneWayInfoData"
