@@ -77,11 +77,18 @@ export default {
         time = Object.assign(flight['arrivalTime'].split(':'));
         flightdate = new Date(date.setHours(time[0], time[1]));
         flight['arrivalTime'] = flightdate;
+        let difference = flight['arrivalTime'] - flight['departureTime'];
+        this.$set(flight, 'duration', this.calcDuration(difference));
         return flight;
       });
       return formattedResp;
     },
-
+    calcDuration(difference) {
+      let diff = Math.floor(difference / (3600 * 1000));
+      let reminder = difference % (3600 * 1000);
+      reminder = reminder / 60000;
+      return `${diff} hr ${reminder} min`;
+    },
     /**
      * function to be called on click of search button
      * @param data represents the data that is searched by user

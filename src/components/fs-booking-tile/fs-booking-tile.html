@@ -10,7 +10,11 @@
       >
       <span>{{multiFlightHeaderDetails.origin}}</span>
       <span>{{multiFlightHeaderDetails.destination}}</span>
-      <span>{{multiFlightHeaderDetails.price}}</span>
+      <span
+        ><b>{{$t('messages.fsMessages.pricelabel')}}</b
+        >{{multiFlightHeaderDetails.price}}
+        {{$t('messages.fsMessages.currencyIn')}}</span
+      >
       <button class="fs-secondary">{{$t('messages.fsMessages.book')}}</button>
     </div>
     <p class="link" @click="toggleDetailsVisibility()">
@@ -27,7 +31,11 @@
         <span v-if="flight.flightNo">{{flight.flightNo}}</span>
         <span>{{flight.origin}}</span>
         <span>{{flight.destination}}</span>
-        <span>{{flight.price}}</span>
+        <span>{{flight.duration}}</span>
+        <span
+          ><b>{{$t('messages.fsMessages.pricelabel')}}</b> {{flight.price}}
+          {{$t('messages.fsMessages.currencyIn')}}</span
+        >
       </div>
     </template>
   </div>
@@ -43,7 +51,11 @@
     <span v-if="flight.flightNo">{{flight.flightNo}}</span>
     <span>{{flight.origin}}</span>
     <span>{{flight.destination}}</span>
-    <span>{{flight.price}}</span>
+    <span>{{flight.duration}}</span>
+    <span
+      ><b>{{$t('messages.fsMessages.pricelabel')}}</b> {{flight.price}}
+      {{$t('messages.fsMessages.currencyIn')}}</span
+    >
     <button class="fs-secondary" v-if="index == 0">
       {{$t('messages.fsMessages.book')}}
     </button>
