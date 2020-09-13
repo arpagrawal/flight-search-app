@@ -111,6 +111,7 @@ export default {
       /**
        * This section will be executed if user has selected return trip
        */
+      this.filteredData = [];
       if (data.returnDate) {
         this.createSearchInfoData(
           data.destination,
